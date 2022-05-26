@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Script from 'next/script'
 
 export default function Home() {
   return (
@@ -18,33 +19,17 @@ export default function Home() {
         </p>
 
         <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="card"
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+          <form action="/api/form" method="post">
+            <label htmlFor="first">First name:</label>
+            <input type="text" id="first" name="first"/>
+            <label htmlFor="last">Last name:</label>
+            <input type="text" id="last" name="last"/>
+            <label htmlFor="dob">DOB:</label>
+            <input type="text" id="dob" name="dob"/>
+            <label htmlFor="ssn">Last 4 SSN:</label>
+            <input type="text" id="ssn" name="ssn"/>
+            <button type="submit">Submit</button>
+          </form>
         </div>
       </main>
 
@@ -59,6 +44,29 @@ export default function Home() {
         </a>
       </footer>
 
+      <Script
+        src="https://cdn-us.trustev.com/trustev.min.js"
+        strategy="beforeInteractive"
+        onLoad={() => {
+          TrustevV2.Init('publicKey', (sessionId) => {
+            sessionStorage.setItem('sessionId', sessionId);
+          }, True);
+        }}
+      />
+
+      <Script
+        src="https://cdn-us.trustev.com/trustev.min.js"
+        strategy="beforeInteractive"
+      >
+        {
+        `
+          TrustevV2.Init('publicKey', (sessionId) => {
+            sessionStorage.setItem('sessionId', sessionId);
+          }, True);
+        `
+        }
+      </Script>
+      
       <style jsx>{`
         .container {
           min-height: 100vh;
