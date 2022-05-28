@@ -46,27 +46,14 @@ export default function Home() {
 
       <Script
         src="https://cdn-us.trustev.com/trustev.min.js"
-        strategy="beforeInteractive"
+        strategy="afterInteractive"
         onLoad={() => {
-          TrustevV2.Init('publicKey', (sessionId) => {
-            sessionStorage.setItem('sessionId', sessionId);
-          }, True);
+          TrustevV2.Init("516ed4d8ade9407788031d37c5fea1bb", (sessionId) => {
+            sessionStorage.setItem("sessionId", sessionId);
+          }, true);
         }}
       />
 
-      <Script
-        src="https://cdn-us.trustev.com/trustev.min.js"
-        strategy="beforeInteractive"
-      >
-        {
-        `
-          TrustevV2.Init('publicKey', (sessionId) => {
-            sessionStorage.setItem('sessionId', sessionId);
-          }, True);
-        `
-        }
-      </Script>
-      
       <style jsx>{`
         .container {
           min-height: 100vh;
